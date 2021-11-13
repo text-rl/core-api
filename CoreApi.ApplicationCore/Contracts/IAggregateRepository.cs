@@ -8,7 +8,7 @@ namespace CoreApi.ApplicationCore.Contracts
         public Task<IEnumerable<TAggregate>> GetAllAsync();
         public Task<TAggregate?> GetByIdAsync(TId id);
         public Task DeleteAsync(TAggregate aggregate);
-        public Task SetAsync(TAggregate aggregate);
+        public Task<TId> SetAsync(TAggregate aggregate);
         public Task<TId> GetNewIdAsync();
     }
 }

@@ -1,5 +1,6 @@
-using System.Reflection;
+using CoreApi.ApplicationCore.Contracts;
 using CoreApi.Infrastructure;
+using CoreApi.Web.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,9 +15,9 @@ builder.Services.AddServices(builder.Configuration);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddMediatR(DependencyInjection.GetAssembly());
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new() { Title = "CoreApi.Web", Version = "v1" }); });
-
-
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
