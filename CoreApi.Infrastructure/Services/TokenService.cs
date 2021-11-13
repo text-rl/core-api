@@ -24,7 +24,7 @@ namespace CoreApi.Infrastructure.Services
             var credentials = GetCredentials();
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+                new Claim(ClaimTypes.UserData, userId.ToString())
             };
 
             return GenerateToken(claims, credentials);
@@ -43,7 +43,10 @@ namespace CoreApi.Infrastructure.Services
         private SigningCredentials? GetCredentials()
         {
             if (_settings.Key is null)
+            {
                 throw new Exception("JWt Key is null please check your JwtSettings");
+            }
+
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             return credentials;

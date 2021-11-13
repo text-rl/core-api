@@ -11,16 +11,20 @@ namespace CoreApi.ApplicationCore
     {
         private readonly IDispatcher<RunTextTreatmentDto> _dispatcher;
         private readonly ITimeService _timeService;
+        private readonly ICurrentUserService _currentUserService;
 
-        public RunTextCommandHandler(IDispatcher<RunTextTreatmentDto> dispatcher, ITimeService timeService)
+        public RunTextCommandHandler(IDispatcher<RunTextTreatmentDto> dispatcher, ITimeService timeService,
+            ICurrentUserService currentUserService)
         {
             _dispatcher = dispatcher;
             _timeService = timeService;
+            _currentUserService = currentUserService;
         }
 
         protected override void Handle(RunTextCommand request)
         {
-            _dispatcher.Dispatch(new RunTextTreatmentDto(Guid.NewGuid(), request.Content, _timeService.Now()));
+            _dispatcher.Dispatch(new RunTextTreatmentDto(_currentUserService.UserId.Value, request.Content,
+                _timeService.Now()));
         }
     }
 }

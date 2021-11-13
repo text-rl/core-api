@@ -25,7 +25,7 @@ namespace CoreApi.Web.Services
                 {
                     return _userId;
                 }
-                var id = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var id = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.UserData);
                 if (id is null)
                 {
                     throw new ApplicationException("User not authenticated");
