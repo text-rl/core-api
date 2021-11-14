@@ -26,7 +26,6 @@ namespace CoreApi.Domain.Users
 
         public string Password { get; private set; }
 
-
         public void UpdateUser(string? email, string? username, string? password)
         {
             if (email is not null)

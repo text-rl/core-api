@@ -1,9 +1,10 @@
-﻿using System;
-using CoreApi.ApplicationCore.Contracts;
+﻿using CoreApi.ApplicationCore.Contracts;
 using CoreApi.ApplicationCore.Dtos;
+using CoreApi.ApplicationCore.Read.Contracts;
+using CoreApi.ApplicationCore.Write.Contracts;
 using MediatR;
 
-namespace CoreApi.ApplicationCore
+namespace CoreApi.ApplicationCore.Write.TextTreatments
 {
     public record RunTextCommand(string Content) : IRequest;
 
@@ -23,6 +24,7 @@ namespace CoreApi.ApplicationCore
 
         protected override void Handle(RunTextCommand request)
         {
+            
             _dispatcher.Dispatch(new RunTextTreatmentDto(_currentUserService.UserId.Value, request.Content,
                 _timeService.Now()));
         }

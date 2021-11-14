@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CoreApi.ApplicationCore;
+using CoreApi.ApplicationCore.Write.TextTreatments;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

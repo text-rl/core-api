@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreApi.Web", "CoreApi.Web\CoreApi.Web.csproj", "{5FD1F54A-B765-4E35-9081-3A6DCB8F3887}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreApi.Client", "CoreApi.Client\CoreApi.Client.csproj", "{5FD1F54A-B765-4E35-9081-3A6DCB8F3887}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreApi.Infrastructure", "CoreApi.Infrastructure\CoreApi.Infrastructure.csproj", "{9D9A18D8-8E71-4A0A-AEB8-F646D9276B8F}"
 EndProject

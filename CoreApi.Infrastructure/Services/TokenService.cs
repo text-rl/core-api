@@ -24,7 +24,7 @@ namespace CoreApi.Infrastructure.Services
             var credentials = GetCredentials();
             var claims = new[]
             {
-                new Claim(ClaimTypes.UserData, userId.ToString())
+                new Claim(ClaimTypes.Name, userId.ToString())
             };
 
             return GenerateToken(claims, credentials);
