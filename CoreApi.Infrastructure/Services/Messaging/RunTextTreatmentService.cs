@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CoreApi.Infrastructure.Services.Messaging
 {
-    public class RunTextTreatmentService : BaseDispatcherService<RunTextTreatmentDto>
+    public class RunTextTreatmentService : BaseDispatcherService<RunTextTreatmentMessage>
     {
         public RunTextTreatmentService(RabbitMqSettings settings,
             ILogger<RunTextTreatmentService> logger) : base(settings, logger)

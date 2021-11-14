@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Application.Write.Users.LoginUser;
+using CoreApi.ApplicationCore.Read.Users;
 using CoreApi.ApplicationCore.Write.RegisterUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -53,6 +55,21 @@ namespace CoreApi.Web.Controllers
             catch (ApplicationException e)
             {
                 return NotFound();
+            }
+        }
+
+        [HttpGet("[action]", Name = nameof(Me))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> Me()
+        {
+            try
+            {
+                PublicUser? loggedUser = await _sender.Send(new GetPublicUserQuery());
+                return Ok(loggedUser);
+            }
+            catch (ApplicationException e)
+            {
+                return Unauthorized();
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Text;
 using CoreApi.Infrastructure.Settings;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
 
 namespace CoreApi.Infrastructure.Services.Messaging
@@ -40,7 +41,12 @@ namespace CoreApi.Infrastructure.Services.Messaging
             _logger.LogInformation("PushMessage in {Exchange}, routing key:{RoutingKey}", Exchange, RoutingKey);
             _channel.ExchangeDeclare(Exchange, ExchangeType.Topic);
 
-            string msgJson = JsonConvert.SerializeObject(message);
+            string msgJson = JsonConvert.SerializeObject(message,
+                new JsonSerializerSettings()
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver() 
+                    
+                });
             var body = Encoding.UTF8.GetBytes(msgJson);
             _channel.BasicPublish(Exchange,
                 RoutingKey,

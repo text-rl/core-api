@@ -62,6 +62,7 @@ namespace CoreApi.Infrastructure
                     o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
             );
         }
+        
 
 
         public static IServiceCollection AddRabbitMq(this IServiceCollection serviceCollection,
@@ -70,7 +71,7 @@ namespace CoreApi.Infrastructure
             // RabbitMQ
             var rabbitMqSettings = configuration.GetRequiredSetting<RabbitMqSettings>();
             serviceCollection.AddSingleton(rabbitMqSettings);
-            return serviceCollection.AddScoped<IDispatcher<RunTextTreatmentDto>, RunTextTreatmentService>();
+            return serviceCollection.AddScoped<IDispatcher<RunTextTreatmentMessage>, RunTextTreatmentService>();
         }
 
         private static IServiceCollection AddJwt(this IServiceCollection services, IConfiguration configuration)

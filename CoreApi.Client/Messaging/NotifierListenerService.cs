@@ -5,13 +5,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace CoreApi.Web.Messaging
 {
     public abstract class NotifierListenerService<TCommand> : RabbitMqBaseListener where TCommand : INotification
     {
         private readonly IServiceProvider _serviceProvider;
-        protected NotifierListenerService(RabbitMqSettings settings, ILogger<NotifierListenerService<TCommand>> logger, IServiceProvider serviceProvider) : base(settings, logger)
+
+        protected NotifierListenerService(RabbitMqSettings settings, ILogger<NotifierListenerService<TCommand>> logger,
+            IServiceProvider serviceProvider) : base(settings, logger)
         {
             _serviceProvider = serviceProvider;
         }
@@ -26,7 +29,11 @@ namespace CoreApi.Web.Messaging
                     "RabbitListener message received on , exchange: {Exchange}, routeKey:{RoutingKey}",
                     Exchange, RoutingKey);
                 var json = JObject.Parse(message);
-                var runParticipation = JsonConvert.DeserializeObject<TCommand>(json.ToString());
+                var runParticipation = JsonConvert.DeserializeObject<TCommand>(json.ToString(),
+                    new JsonSerializerSettings()
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    });
                 if (runParticipation is null)
                 {
                     Logger.LogError("Cannot parse rabbitmq message");
