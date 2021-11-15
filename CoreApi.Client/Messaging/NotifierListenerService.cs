@@ -45,8 +45,8 @@ namespace CoreApi.Web.Messaging
             }
             catch (Exception ex)
             {
-                Logger.LogError("Process fail,error:{ExceptionMessage},stackTrace:{ex.StackTrace},message:{Message}",
-                    ex.Message, message);
+                Logger.LogError("Process fail,error:{ExceptionMessage},stackTrace:{StackTrace},message:{Message}",
+                    ex.Message,ex.StackTrace, message);
                 Logger.LogError(-1, ex, "Process fail");
                 return false;
             }
