@@ -1,16 +1,9 @@
-using CoreApi.ApplicationCore.Contracts;
 using CoreApi.Infrastructure;
-using CoreApi.Infrastructure.Extensions;
-using CoreApi.Infrastructure.Settings;
-using CoreApi.Web;
 using CoreApi.Web.Extensions;
 using CoreApi.Web.Hubs;
-using CoreApi.Web.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Connections;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DependencyInjection = CoreApi.ApplicationCore.DependencyInjection;
@@ -33,6 +26,7 @@ builder.Services.AddMessageServices();
 builder.AddCors(CorsPolicyName);
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new() { Title = "CoreApi.Client", Version = "v1" }); });
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddJwt(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -26,7 +26,7 @@ namespace CoreApi.ApplicationCore.Write.TextTreatments
         {
             
             _dispatcher.Dispatch(new RunTextTreatmentMessage(_currentUserService.UserId, request.Content,
-                _timeService.Now()));
+                _timeService.Now()));       
         }
     }
 }

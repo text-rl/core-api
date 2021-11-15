@@ -28,8 +28,7 @@ namespace CoreApi.Infrastructure
                 .AddDatabase(configuration)
                 .AddRabbitMq(configuration)
                 .AddReadRepositories()
-                .AddAggregateRepositories()
-                .AddJwt(configuration);
+                .AddAggregateRepositories();
         }
 
         public static IServiceCollection AddReadRepositories(this IServiceCollection serviceCollection)
@@ -74,39 +73,6 @@ namespace CoreApi.Infrastructure
             return serviceCollection.AddScoped<IDispatcher<RunTextTreatmentMessage>, RunTextTreatmentService>();
         }
 
-        private static IServiceCollection AddJwt(this IServiceCollection services, IConfiguration configuration)
-        {
-            var jwtSettings = configuration.GetRequiredSetting<JwtSettings>();
-            services.AddSingleton(jwtSettings);
-            if (jwtSettings.Key is null)
-            {
-                throw new Exception("JWt Key is null please check your JwtSettings");
-            }
-
-            if (jwtSettings.MinutesDuration is null)
-            {
-                throw new Exception("JWt MinutesDuration is null please check your JwtSettings");
-            }
-
-            services.AddAuthentication(opt =>
-                {
-                    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = jwtSettings.Issuer,
-                        ValidAudience = jwtSettings.Audience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
-                    };
-                });
-            return services;
-        }
+        
     }
 }

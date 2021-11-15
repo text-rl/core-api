@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CoreApi.ApplicationCore.Contracts;
-using CoreApi.Domain.Users;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 
 namespace CoreApi.Web.Hubs
 {
@@ -10,13 +10,10 @@ namespace CoreApi.Web.Hubs
         Task OnTextTreatmentDone(TextTreatmentDoneEvent? serverEvent);
     }
 
-    public class TextTreatmentHub : Hub<ITextTreatmentClient>, ITextTreatmentMessageService
+    public class TextTreatmentHub : Hub<ITextTreatmentClient>
     {
         public static string Route = "/texttreatmenthub";
 
-        public void NotififyUser(UserId userId, TextTreatmentDoneEvent treatmentDoneEvent)
-        {
-            Clients.User(userId.Value.ToString()).OnTextTreatmentDone(treatmentDoneEvent);
-        }
+       
     }
 }

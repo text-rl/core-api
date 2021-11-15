@@ -20,7 +20,7 @@ namespace CoreApi.Web.Messaging
         }
 
         public override bool Process(string message)
-        {
+        {   
             try
             {
                 using var scope = _serviceProvider.CreateScope();

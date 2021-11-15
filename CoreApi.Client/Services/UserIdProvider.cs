@@ -4,6 +4,7 @@ using CoreApi.ApplicationCore.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CoreApi.Web.Services
 {
@@ -11,7 +12,8 @@ namespace CoreApi.Web.Services
     {
         public string? GetUserId(HubConnectionContext connection)
         {
-            return connection.User.FindFirstValue(ClaimTypes.Name);
+            var id = connection.User.FindFirstValue(ClaimTypes.Name);
+            return id;
         }
     }
 }
