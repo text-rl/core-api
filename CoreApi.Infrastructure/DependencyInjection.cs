@@ -61,7 +61,6 @@ namespace CoreApi.Infrastructure
                     o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
             );
         }
-        
 
 
         public static IServiceCollection AddRabbitMq(this IServiceCollection serviceCollection,
@@ -72,7 +71,5 @@ namespace CoreApi.Infrastructure
             serviceCollection.AddSingleton(rabbitMqSettings);
             return serviceCollection.AddScoped<IDispatcher<RunTextTreatmentMessage>, RunTextTreatmentService>();
         }
-
-        
     }
 }

@@ -1,23 +1,22 @@
 ﻿using CoreApi.ApplicationCore.Contracts;
 using CoreApi.Domain.Users;
-using CoreApi.Web.Hubs;
+using CoreApi.Web.Sse;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CoreApi.Web.Services
 {
     public class TextTreatmentMessageService : ITextTreatmentMessageService
     {
-        private readonly IHubContext<TextTreatmentHub, ITextTreatmentClient> _hub;
+        private readonly ISseService _sseService;
 
-        public TextTreatmentMessageService(IHubContext<TextTreatmentHub, ITextTreatmentClient> hub)
+        public TextTreatmentMessageService(ISseService sseService)
         {
-            _hub = hub;
+            _sseService = sseService;
         }
 
         public void NotififyUser(UserId userId, TextTreatmentDoneEvent treatmentDoneEvent)
         {
-            var id = userId.Value.ToString();
-            _hub.Clients.User(id).OnTextTreatmentDone(treatmentDoneEvent);
+            _sseService.SendToClientAsync(treatmentDoneEvent, userId.Value, "onTreatmentDone");
         }
     }
 }

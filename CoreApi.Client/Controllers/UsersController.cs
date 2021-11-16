@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Application.Write.Users.LoginUser;
 using CoreApi.ApplicationCore.Read.Users;
+using CoreApi.ApplicationCore.Write.LoginUser;
 using CoreApi.ApplicationCore.Write.RegisterUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

@@ -4,13 +4,15 @@ using System.Threading.Tasks;
 using CoreApi.ApplicationCore.Contracts;
 using CoreApi.Infrastructure.Extensions;
 using CoreApi.Infrastructure.Settings;
-using CoreApi.Web.Hubs;
 using CoreApi.Web.Messaging;
 using CoreApi.Web.Services;
+using CoreApi.Web.Sse;
+using Lib.AspNetCore.ServerSentEvents;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CoreApi.Web.Extensions
@@ -20,7 +22,6 @@ namespace CoreApi.Web.Extensions
         public static void AddUserServices(this IServiceCollection services)
         {
             services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddTransient<IUserIdProvider, UserIdProvider>();
         }
 
         public static IServiceCollection AddJwt(this IServiceCollection services, IConfiguration configuration)
@@ -44,22 +45,6 @@ namespace CoreApi.Web.Extensions
                 })
                 .AddJwtBearer(options =>
                 {
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnMessageReceived = context =>
-                        {
-                            var accessToken = context.Request.Query["access_token"];
-
-                            // If the request is for our hub...
-                            var path = context.HttpContext.Request.Path;
-                            if (!string.IsNullOrEmpty(accessToken) &&
-                                path.StartsWithSegments(TextTreatmentHub.Route))
-                                // Read the token out of the query string
-                                context.Token = accessToken;
-
-                            return Task.CompletedTask;
-                        }
-                    };
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
@@ -82,6 +67,14 @@ namespace CoreApi.Web.Extensions
         public static void AddMessageServices(this IServiceCollection services)
         {
             services.AddSingleton<ITextTreatmentMessageService, TextTreatmentMessageService>();
+        }
+
+        public static void AddSse(this IServiceCollection services)
+        {
+            services.AddServerSentEvents();
+            services.AddSingleton<IHostedService, HeartbeatService>();
+            services.AddSingleton<IServerSentEventsClientIdProvider, SseTokenClientIdProvider>();
+            services.AddServerSentEvents<ISseService, SseService>();
         }
     }
 }

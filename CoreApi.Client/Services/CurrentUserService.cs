@@ -25,6 +25,7 @@ namespace CoreApi.Web.Services
                 {
                     return _userId;
                 }
+
                 var id = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name);
                 if (id is null)
                 {

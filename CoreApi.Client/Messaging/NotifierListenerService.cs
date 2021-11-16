@@ -20,7 +20,7 @@ namespace CoreApi.Web.Messaging
         }
 
         public override bool Process(string message)
-        {   
+        {
             try
             {
                 using var scope = _serviceProvider.CreateScope();
@@ -46,7 +46,7 @@ namespace CoreApi.Web.Messaging
             catch (Exception ex)
             {
                 Logger.LogError("Process fail,error:{ExceptionMessage},stackTrace:{StackTrace},message:{Message}",
-                    ex.Message,ex.StackTrace, message);
+                    ex.Message, ex.StackTrace, message);
                 Logger.LogError(-1, ex, "Process fail");
                 return false;
             }

@@ -21,7 +21,7 @@ namespace CoreApi.Infrastructure.Services
 
         public Task<string> GenerateUserTokenAsync(Guid userId)
         {
-            var credentials = GetCredentials();
+            SigningCredentials? credentials = GetCredentials();
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, userId.ToString())

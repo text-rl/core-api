@@ -77,7 +77,10 @@ namespace CoreApi.Web.Messaging
                     var message = Encoding.UTF8.GetString(body.ToArray());
 
                     var result = Process(message);
-                    if (result) _channel.BasicAck(ea.DeliveryTag, false);
+                    if (result)
+                    {
+                        _channel.BasicAck(ea.DeliveryTag, false);
+                    }
                 };
                 _channel.BasicConsume(queue: queueName, consumer: consumer);
             }

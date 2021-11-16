@@ -44,8 +44,7 @@ namespace CoreApi.Infrastructure.Services.Messaging
             string msgJson = JsonConvert.SerializeObject(message,
                 new JsonSerializerSettings()
                 {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver() 
-                    
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
                 });
             var body = Encoding.UTF8.GetBytes(msgJson);
             _channel.BasicPublish(Exchange,

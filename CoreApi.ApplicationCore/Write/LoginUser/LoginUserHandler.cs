@@ -7,7 +7,7 @@ using CoreApi.ApplicationCore.Write.Contracts;
 using CoreApi.Domain.Users;
 using MediatR;
 
-namespace Application.Write.Users.LoginUser
+namespace CoreApi.ApplicationCore.Write.LoginUser
 {
     public record LoginUserQuery(string Password, string Email) : IRequest<TokenResponse>;
 
@@ -34,11 +34,13 @@ namespace Application.Write.Users.LoginUser
             {
                 throw new ApplicationException($"User {request.Email} not found");
             }
+
             UserAggregate? user = await _userRepository.GetByIdAsync(new UserId(userId.Value));
             if (user is null)
             {
                 throw new ApplicationException($"User {request.Email} not found");
             }
+
             if (!_securityService.ValidatePassword(request.Password, user.Password))
             {
                 throw new ApplicationException("Invalid credentials");

@@ -15,5 +15,4 @@ namespace CoreApi.Web.Messaging
             RoutingKey = settings.DoneTreatmentRoutingKey;
         }
     }
-
 }

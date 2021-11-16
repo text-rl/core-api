@@ -1,4 +1,4 @@
-﻿namespace Application.Write.Users.LoginUser
+﻿namespace CoreApi.ApplicationCore.Write.LoginUser
 {
     public record TokenResponse(string Token);
 }

@@ -7,7 +7,6 @@ namespace CoreApi.Web.Extensions
 {
     public static class WebApplicationBuilderExtensions
     {
-
         public static void AddCors(this WebApplicationBuilder builder, string corsPolicyName)
         {
             var corsSettings = builder.Configuration.GetRequiredSetting<CorsSettings>();
@@ -22,7 +21,6 @@ namespace CoreApi.Web.Extensions
                         .WithExposedHeaders("Location");
                 });
             });
-            
         }
     }
 }

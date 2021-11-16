@@ -5,6 +5,9 @@ namespace CoreApi.Infrastructure.Services
 {
     public class TimeService : ITimeService
     {
-        public DateTime Now() => DateTime.Now;
+        public DateTime Now()
+        {
+            return DateTime.Now;
+        }
     }
 }

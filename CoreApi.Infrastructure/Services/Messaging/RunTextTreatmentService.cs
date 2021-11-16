@@ -13,6 +13,4 @@ namespace CoreApi.Infrastructure.Services.Messaging
             RoutingKey = settings.PendingTreatmentRoutingKey;
         }
     }
-
-  
 }

@@ -34,6 +34,7 @@ namespace CoreApi.ApplicationCore.Write.RegisterUser
             {
                 throw new ApplicationException("Username or email already exists");
             }
+
             var user = new UserAggregate(id, password, request.Email, request.Username);
             await _userRepository.SetAsync(user);
             return id.ToString();
