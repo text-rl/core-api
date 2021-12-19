@@ -3,7 +3,7 @@ using CoreApi.ApplicationCore.Write.TextTreatments;
 using CoreApi.Infrastructure.Settings;
 using Microsoft.Extensions.Logging;
 
-namespace CoreApi.Web.Messaging
+namespace CoreApi.Client.Messaging
 {
     public class DoneTreatmentListener : NotifierListenerService<TreatmentDoneNotification>
     {

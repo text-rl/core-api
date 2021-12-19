@@ -1,7 +1,7 @@
 using System.Linq;
 using CoreApi.Infrastructure;
-using CoreApi.Web.Extensions;
-using CoreApi.Web.Sse;
+using CoreApi.Client.Extensions;
+using CoreApi.Client.Sse;
 using Lib.AspNetCore.ServerSentEvents;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Prometheus;
 using DependencyInjection = CoreApi.ApplicationCore.DependencyInjection;
 
-const string CorsPolicyName = "AllowAll";
+const string corsPolicyName = "AllowAll";
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,7 +27,7 @@ builder.Services.AddMediatR(DependencyInjection.GetAssembly());
 builder.Services.AddUserServices();
 builder.Services.AddRabbitMq();
 builder.Services.AddMessageServices();
-builder.AddCors(CorsPolicyName);
+builder.AddCors(corsPolicyName);
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -40,7 +41,6 @@ builder.Services.AddResponseCompression(options =>
     options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "text/event-stream" });
 });
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (builder.Environment.IsDevelopment())
 {
@@ -49,14 +49,15 @@ if (builder.Environment.IsDevelopment())
         .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CoreApi.Client v1"));
 }
 
-
 app.UseRouting()
-    .UseCors(CorsPolicyName)
+    .UseHttpMetrics()
+    .UseCors(corsPolicyName)
     .UseAuthentication()
     .UseAuthorization()
     .UseEndpoints(endpoints =>
     {
-        endpoints.MapServerSentEvents("/see-heartbeat");
+        endpoints.MapMetrics();
+        endpoints.MapServerSentEvents("/sse-heartbeat");
         endpoints.MapServerSentEvents<SseService>("/sse-texttreatment");
         endpoints.MapControllers();
     });

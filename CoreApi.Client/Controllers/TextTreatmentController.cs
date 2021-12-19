@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CoreApi.Web.Controllers
+namespace CoreApi.Client.Controllers
 {
     [ApiController]
     [Route("[controller]")]

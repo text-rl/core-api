@@ -3,7 +3,7 @@ using System.Security.Claims;
 using Lib.AspNetCore.ServerSentEvents;
 using Microsoft.AspNetCore.Http;
 
-namespace CoreApi.Web.Sse
+namespace CoreApi.Client.Sse
 {
     public class SseTokenClientIdProvider : IServerSentEventsClientIdProvider
     {

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoreApi.Web.Controllers
+namespace CoreApi.Client.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -33,7 +33,7 @@ namespace CoreApi.Web.Controllers
             try
             {
                 var res = await _sender.Send(registerUserCommand);
-                return CreatedAtRoute(nameof(Authentication), new { });
+                return CreatedAtRoute(nameof(Me), new { });
             }
             catch (ApplicationException e)
             {

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace CoreApi.Web.Messaging
+namespace CoreApi.Client.Messaging
 {
     public abstract class RabbitMqBaseListener : IHostedService
     {

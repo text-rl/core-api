@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace CoreApi.Web.Sse
+namespace CoreApi.Client.Sse
 {
     public class SseService : ServerSentEventsService, ISseService
     {

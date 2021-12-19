@@ -4,18 +4,19 @@ using System.Threading.Tasks;
 using CoreApi.ApplicationCore.Contracts;
 using CoreApi.Infrastructure.Extensions;
 using CoreApi.Infrastructure.Settings;
-using CoreApi.Web.Messaging;
-using CoreApi.Web.Services;
-using CoreApi.Web.Sse;
+using CoreApi.Client.Messaging;
+using CoreApi.Client.Services;
+using CoreApi.Client.Sse;
 using Lib.AspNetCore.ServerSentEvents;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
-namespace CoreApi.Web.Extensions
+namespace CoreApi.Client.Extensions
 {
     public static class ServicesExtensions
     {
@@ -76,5 +77,6 @@ namespace CoreApi.Web.Extensions
             services.AddSingleton<IServerSentEventsClientIdProvider, SseTokenClientIdProvider>();
             services.AddServerSentEvents<ISseService, SseService>();
         }
+        
     }
 }

@@ -3,7 +3,7 @@ using CoreApi.Infrastructure.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoreApi.Web.Extensions
+namespace CoreApi.Client.Extensions
 {
     public static class WebApplicationBuilderExtensions
     {

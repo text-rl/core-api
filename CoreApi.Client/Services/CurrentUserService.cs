@@ -4,7 +4,7 @@ using CoreApi.ApplicationCore.Contracts;
 using CoreApi.Domain.Users;
 using Microsoft.AspNetCore.Http;
 
-namespace CoreApi.Web.Services
+namespace CoreApi.Client.Services
 {
     public class CurrentUserService : ICurrentUserService
     {

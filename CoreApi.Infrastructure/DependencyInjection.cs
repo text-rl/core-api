@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Threading.Tasks;
 using CoreApi.ApplicationCore.Contracts;
 using CoreApi.ApplicationCore.Dtos;
 using CoreApi.ApplicationCore.Read.Contracts;
@@ -12,11 +10,9 @@ using CoreApi.Infrastructure.Repository.ReadRepositories;
 using CoreApi.Infrastructure.Services;
 using CoreApi.Infrastructure.Services.Messaging;
 using CoreApi.Infrastructure.Settings;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 
 namespace CoreApi.Infrastructure
 {
@@ -24,6 +20,7 @@ namespace CoreApi.Infrastructure
     {
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
+
             return services.AddCommonServices()
                 .AddDatabase(configuration)
                 .AddRabbitMq(configuration)

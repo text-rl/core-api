@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Lib.AspNetCore.ServerSentEvents;
 
-namespace CoreApi.Web.Sse
+namespace CoreApi.Client.Sse
 {
     public interface ISseService : IServerSentEventsService
     {

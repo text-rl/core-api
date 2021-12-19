@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Lib.AspNetCore.ServerSentEvents;
 using Microsoft.Extensions.Hosting;
 
-namespace CoreApi.Web.Services
+namespace CoreApi.Client.Services
 {
     internal class HeartbeatService : BackgroundService
     {

@@ -3,20 +3,22 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <RootNamespace>CoreApi.Web</RootNamespace>
+        <RootNamespace>CoreApi.Client</RootNamespace>
+        <ServerGarbageCollection>true</ServerGarbageCollection> 
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Lib.AspNetCore.ServerSentEvents" Version="7.0.0"/>
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3"/>
+        <PackageReference Include="Lib.AspNetCore.ServerSentEvents" Version="7.0.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+        <PackageReference Include="prometheus-net.AspNetCore" Version="5.0.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CoreApi.ApplicationCore\CoreApi.ApplicationCore.csproj"/>
-        <ProjectReference Include="..\CoreApi.Domain\CoreApi.Domain.csproj"/>
-        <ProjectReference Include="..\CoreApi.Infrastructure\CoreApi.Infrastructure.csproj"/>
+        <ProjectReference Include="..\CoreApi.ApplicationCore\CoreApi.ApplicationCore.csproj" />
+        <ProjectReference Include="..\CoreApi.Domain\CoreApi.Domain.csproj" />
+        <ProjectReference Include="..\CoreApi.Infrastructure\CoreApi.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

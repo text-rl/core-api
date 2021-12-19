@@ -1,9 +1,9 @@
 ﻿using CoreApi.ApplicationCore.Contracts;
 using CoreApi.Domain.Users;
-using CoreApi.Web.Sse;
+using CoreApi.Client.Sse;
 using Microsoft.AspNetCore.SignalR;
 
-namespace CoreApi.Web.Services
+namespace CoreApi.Client.Services
 {
     public class TextTreatmentMessageService : ITextTreatmentMessageService
     {

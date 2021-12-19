@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-namespace CoreApi.Web.Messaging
+namespace CoreApi.Client.Messaging
 {
     public abstract class NotifierListenerService<TCommand> : RabbitMqBaseListener where TCommand : INotification
     {

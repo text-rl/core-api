@@ -7,5 +7,7 @@
         public string? Audience { get; set; }
 
         public int? MinutesDuration { get; set; }
+        
+        public string? Algorithm { get; set; }
     }
 }

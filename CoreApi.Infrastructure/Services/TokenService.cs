@@ -48,7 +48,7 @@ namespace CoreApi.Infrastructure.Services
             }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var credentials = new SigningCredentials(securityKey, _settings.Algorithm);
             return credentials;
         }
     }
