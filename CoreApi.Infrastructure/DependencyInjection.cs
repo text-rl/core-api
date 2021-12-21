@@ -13,6 +13,7 @@ using CoreApi.Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CoreApi.Infrastructure
 {
@@ -20,7 +21,6 @@ namespace CoreApi.Infrastructure
     {
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
-
             return services.AddCommonServices()
                 .AddDatabase(configuration)
                 .AddRabbitMq(configuration)
@@ -53,9 +53,25 @@ namespace CoreApi.Infrastructure
                 throw new Exception("Please provide connection string");
             }
 
+
             return services.AddDbContext<CoreApiContext>(options =>
-                options.UseSqlServer(dbSettings.ConnectionString,
-                    o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+                {
+                    {
+                        if (dbSettings.Type == DbType.MySql)
+                        {
+                            options.UseMySql(dbSettings.ConnectionString,
+                                    new MySqlServerVersion(new Version(8, 0, 27)))
+                                .LogTo(Console.WriteLine, LogLevel.Information)
+                                .EnableSensitiveDataLogging()
+                                .EnableDetailedErrors();
+                        }
+                        else
+                        {
+                            options.UseSqlServer(dbSettings.ConnectionString,
+                                o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
+                        }
+                    }
+                }
             );
         }
 
