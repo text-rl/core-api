@@ -60,10 +60,7 @@ namespace CoreApi.Infrastructure
                         if (dbSettings.Type == DbType.MySql)
                         {
                             options.UseMySql(dbSettings.ConnectionString,
-                                    new MySqlServerVersion(new Version(8, 0, 27)))
-                                .LogTo(Console.WriteLine, LogLevel.Information)
-                                .EnableSensitiveDataLogging()
-                                .EnableDetailedErrors();
+                                new MySqlServerVersion(new Version(8, 0, 27)));
                         }
                         else
                         {
