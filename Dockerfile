@@ -18,4 +18,7 @@ RUN mkdir monitoring && mkdir src/app && \
 COPY --from=build /app/published-app ./src/app
 COPY --from=build /app/docker-run.sh ./src/app/docker-run.sh
 RUN ls ./src/app
+
+RUN chmod 777 -R ./src/app/docker-run.sh
+
 CMD [ "./src/app/docker-run.sh"  ]
